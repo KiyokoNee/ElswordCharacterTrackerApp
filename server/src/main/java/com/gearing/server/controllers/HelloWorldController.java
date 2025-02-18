@@ -1,4 +1,4 @@
-package com.gearing.server.Controllers;
+package com.gearing.server.controllers;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
