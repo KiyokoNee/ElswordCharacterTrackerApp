@@ -23,7 +23,9 @@ public class CharacterService {
     }
 
     public CharacterDTO getCharacterById(Long id) {
-        characterRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Character does not exist with id: " + id));
-        return new CharacterDTO();
+        Character character = characterRepo.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Character does not exist with id: " + id));
+        return CharacterMapper.characterToCharacterDTO(character);
     }
 }
