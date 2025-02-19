@@ -1,6 +1,7 @@
 package com.gearing.server.services;
 
 import com.gearing.server.dto.CharacterDTO;
+import com.gearing.server.exception.ResourceNotFoundException;
 import com.gearing.server.mappers.CharacterMapper;
 import com.gearing.server.repositories.CharacterRepository;
 import jakarta.transaction.Transactional;
@@ -19,5 +20,10 @@ public class CharacterService {
         Character character = CharacterMapper.characterDTOToCharacter(characterDTO);
         characterRepo.save(character);
         return CharacterMapper.characterToCharacterDTO(character);
+    }
+
+    public CharacterDTO getCharacterById(Long id) {
+        characterRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Character does not exist with id: " + id));
+        return new CharacterDTO();
     }
 }
