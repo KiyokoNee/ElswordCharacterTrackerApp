@@ -1,13 +1,6 @@
-package com.gearing.server.models;
+package com.gearing.server.dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-
-@Entity
-@Table(name = "characters")
-public class Character {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CharacterDTO {
     private Long id;
     private String nickname;
     private String characterName;
@@ -15,9 +8,9 @@ public class Character {
     private String roleId;
     private String stage;
 
-    public Character() {}
+    public CharacterDTO() {}
 
-    public Character(Long id, String nickname, String characterName, String role, String roleId, String stage) {}
+    public CharacterDTO(Long id, String nickname, String characterName, String role, String roleId, String stage) {}
 
     public Long getId() {
         return id;
