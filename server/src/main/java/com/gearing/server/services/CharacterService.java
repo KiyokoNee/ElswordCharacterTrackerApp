@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.gearing.server.models.Character;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class CharacterService {
@@ -18,14 +22,46 @@ public class CharacterService {
 
     public CharacterDTO createCharacter(CharacterDTO characterDTO) {
         Character character = CharacterMapper.characterDTOToCharacter(characterDTO);
-        characterRepo.save(character);
-        return CharacterMapper.characterToCharacterDTO(character);
+        Character savedCharacter = characterRepo.save(character);
+        return CharacterMapper.characterToCharacterDTO(savedCharacter);
     }
 
     public CharacterDTO getCharacterById(Long id) {
         Character character = characterRepo.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Character does not exist with id: " + id));
+                        new ResourceNotFoundException("Character does not exist with id: " + id)
+                );
         return CharacterMapper.characterToCharacterDTO(character);
+    }
+
+    public List<CharacterDTO> getAllCharacters() {
+        List<Character> characters = characterRepo.findAll();
+        // in the return convert Character objects to CharacterDTO objects using lamda expression
+        return characters.stream().map((character) -> CharacterMapper.characterToCharacterDTO(character)).collect(Collectors.toList());
+    }
+
+    public CharacterDTO updateCharacter(Long id, CharacterDTO characterDTO) {
+        Character character = characterRepo.findById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Character does not exist with id: " + id)
+                );
+        character.setNickname(characterDTO.getNickname());
+        character.setStage(characterDTO.getStage());
+        character.setRole(characterDTO.getRole());
+        character.setRoleId(characterDTO.getRoleId());
+
+        Character updatedCharacter = characterRepo.save(character);
+
+        return CharacterMapper.characterToCharacterDTO(updatedCharacter);
+    }
+
+    public void deleteCharacter(Long id) {
+        // check that character exists
+        characterRepo.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Character does not exist with id: " + id)
+                );
+
+        characterRepo.deleteById(id);
     }
 }

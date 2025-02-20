@@ -17,7 +17,14 @@ public class Character {
 
     public Character() {}
 
-    public Character(Long id, String nickname, String characterName, String role, String roleId, String stage) {}
+    public Character(Long id, String nickname, String characterName, String role, String roleId, String stage) {
+        this.id = id;
+        this.nickname = nickname;
+        this.characterName = characterName;
+        this.role = role;
+        this.roleId = roleId;
+        this.stage = stage;
+    }
 
     public Long getId() {
         return id;

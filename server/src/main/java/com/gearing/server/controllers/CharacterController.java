@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/characters")
 public class CharacterController {
@@ -23,5 +25,24 @@ public class CharacterController {
     public ResponseEntity<CharacterDTO> getCharacterById(@PathVariable("id") Long characterId) {
         CharacterDTO character = characterService.getCharacterById(characterId);
         return ResponseEntity.ok(character);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CharacterDTO>> getAllCharacters() {
+        List<CharacterDTO> characters = characterService.getAllCharacters();
+        return ResponseEntity.ok(characters);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CharacterDTO> updateCharacter(@PathVariable("id") Long characterId, @RequestBody CharacterDTO characterDTO) {
+        CharacterDTO updatedCharacter = characterService.updateCharacter(characterId, characterDTO);
+        return ResponseEntity.ok(updatedCharacter);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCharacter(@PathVariable("id") Long characterId) {
+        characterService.deleteCharacter(characterId);
+
+        return ResponseEntity.ok("Character deleted successfully.");
     }
 }
