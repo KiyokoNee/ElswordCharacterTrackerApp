@@ -1,10 +1,15 @@
 
 import './App.css'
+import {HelloWorld} from "./components/HelloWorld.tsx";
+import {DisplayAllCharacters} from "./components/DisplayAllCharacters.tsx";
 
 function App() {
 
   return (
-      <p>Halp</p>
+      <>
+          <HelloWorld />
+          <DisplayAllCharacters />
+      </>
   )
 }
 
