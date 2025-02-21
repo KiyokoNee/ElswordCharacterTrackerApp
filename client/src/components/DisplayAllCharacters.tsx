@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {getAllCharacters} from "../services/CharacterService.ts";
+import {useNavigate} from "react-router-dom";
 
 interface character {
     id: bigint,
@@ -12,6 +13,7 @@ interface character {
 
 export const DisplayAllCharacters = () => {
     const [characters, setCharacters] = useState<character[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getAllCharacters().then(res => {
@@ -21,9 +23,14 @@ export const DisplayAllCharacters = () => {
         })
     }, []);
 
+    const createCharacter = () => {
+        navigate("/create-character")
+    }
+
     return (
         <div className="container">
-            <h2 className="text-center">Test List</h2>
+            <h2 className="text-center">Current Characters</h2>
+            <button type="button" className="btn btn-primary" onClick={createCharacter}>Create Character</button>
             <table className="table table-striped">
                 <thead>
                     <tr>
