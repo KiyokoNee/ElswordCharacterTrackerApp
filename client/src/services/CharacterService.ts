@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const http = axios.create({
-    baseURL: 'http://localhost:8080/api/characters'
+    baseURL: 'http://localhost:8080/api/characterSlots'
 })
 
 export const getAllCharacters = async () => {
@@ -20,16 +20,16 @@ export const getCharacterById = async (id:bigint) => {
         });
 }
 
-export const updateCharacterById = async (id:bigint, character:object) => {
-    return await http.patch(`/${id}`, character)
+export const updateCharacterById = async (id:bigint, characterSlot:object) => {
+    return await http.patch(`/${id}`, characterSlot)
         .then(response => response.data)
         .catch(err => {
             throw err;
         });
 }
 
-export const addOneCharacter = async (character:object) => {
-    return await http.post('', character)
+export const addOneCharacter = async (characterSlot:object) => {
+    return await http.post('', characterSlot)
         .then(res => res.data)
         .catch(err => {
             throw err;

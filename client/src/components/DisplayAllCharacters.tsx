@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {getAllCharacters} from "../services/CharacterService.ts";
 import {useNavigate} from "react-router-dom";
 
-interface character {
+interface characterSlot {
     id: bigint,
     nickname: String,
     characterName: String,
@@ -12,7 +12,7 @@ interface character {
 }
 
 export const DisplayAllCharacters = () => {
-    const [characters, setCharacters] = useState<character[]>([]);
+    const [characterSlots, setCharacters] = useState<characterSlot[]>([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -43,7 +43,7 @@ export const DisplayAllCharacters = () => {
                 </thead>
                 <tbody>
                     {
-                        characters.map((oneCharacter, index) =>
+                        characterSlots.map((oneCharacter, index) =>
                         <tr key={index}>
                             <td>{oneCharacter.nickname}</td>
                             <td>{oneCharacter.characterName}</td>

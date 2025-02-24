@@ -1,23 +1,40 @@
 package com.gearing.server.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "characters")
-public class Character {
+public class CharacterSlot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
+    @NotBlank
     private String nickname;
+    @NotBlank
+    @Size(min = 3)
     private String characterName;
+    @NotBlank
+    @Size(min = 4)
     private String role;
+    @NotBlank
+    @Size(min = 2, max = 5)
     private String roleId;
+    @NotBlank
+    @Size(min = 2)
     private String stage;
 
-    public Character() {}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User creator;
 
-    public Character(Long id, String nickname, String characterName, String role, String roleId, String stage) {
+    public CharacterSlot() {}
+
+    public CharacterSlot(Long id, String nickname, String characterName, String role, String roleId, String stage) {
         this.id = id;
         this.nickname = nickname;
         this.characterName = characterName;
@@ -72,5 +89,13 @@ public class Character {
 
     public void setStage(String stage) {
         this.stage = stage;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 }
