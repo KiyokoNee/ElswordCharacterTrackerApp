@@ -2,6 +2,7 @@ package com.gearing.server.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "characters")
@@ -9,10 +10,17 @@ public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
+    @Column(unique = true)
     private String nickname;
+    @NotBlank
     private String characterName;
+    @NotBlank
     private String role;
+    @NotBlank
+    @Size(min = 2, max = 5, message = "Class Code must be between 2 and 5 characters long!")
     private String roleId;
+    @NotBlank
     private String stage;
 
     public Character() {}
