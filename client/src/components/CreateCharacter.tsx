@@ -54,20 +54,26 @@ export const CreateCharacter = () => {
     const [errors, setErrors] = useState(defaultErrors)
     const [formDataChanged, setFormDataChanged] = useState(defaultChangeTracker)
 
-    const formErrorHandler = (e) => {
+    const formErrorHandler = (e: React.ChangeEvent<HTMLElement>) => {
         let errorMsg = ''
-        switch(e.target.name) {
+        let name:string, value:string
+
+        if(e.target instanceof HTMLInputElement)
+            ({name, value} = e.target)
+        else
+            return;
+        switch(name) {
             case 'nickname':
-                errorMsg = nicknameErrorCheck(e.target.value)
+                errorMsg = nicknameErrorCheck(value)
                 break;
             case 'characterName':
-                errorMsg = characterErrorCheck(e.target.value)
+                errorMsg = characterErrorCheck(value)
                 break;
             case 'role':
-                errorMsg = roleErrorCheck(e.target.value)
+                errorMsg = roleErrorCheck(value)
                 break;
             case 'roleId':
-                errorMsg = roleIdErrorCheck(e.target.value)
+                errorMsg = roleIdErrorCheck(value)
                 break;
         }
         setErrors({...errors, [e.target.name]: errorMsg})
@@ -84,6 +90,7 @@ export const CreateCharacter = () => {
             // If we do check boxes, then this gets used
         } else {
             setFormData(prev => ({...prev, [name]: value}))
+            formErrorHandler(e)
             setFormDataChanged(prev => ({...prev, [name]: true}))
         }
     }
@@ -104,6 +111,13 @@ export const CreateCharacter = () => {
                 })
 
             navigate("/")
+        }else {
+            setErrors({
+                nickname: nicknameErrorCheck(formData.nickname),
+                characterName: characterErrorCheck(formData.characterName),
+                role: roleErrorCheck(formData.role),
+                roleId: roleIdErrorCheck(formData.roleId)
+            })
         }
     }
 
@@ -121,8 +135,11 @@ export const CreateCharacter = () => {
                                     name="nickname"
                                     value={formData.nickname}
                                     onChange={updateFormData}
-                                    className='form-control'
+                                    className={`form-control ${errors.nickname ? 'is-invalid' : ''}`}
                                 />
+                                {
+                                    errors.nickname && <p className='invalid-feedback'>{errors.nickname}</p>
+                                }
                             </label>
                         </div>
                         <div className='mb-2 w-50 mx-auto'>
@@ -133,8 +150,11 @@ export const CreateCharacter = () => {
                                     name="characterName"
                                     value={formData.characterName}
                                     onChange={updateFormData}
-                                    className='form-control'
+                                    className={`form-control ${errors.characterName ? 'is-invalid' : ''}`}
                                 />
+                                {
+                                    errors.characterName && <p className='invalid-feedback'>{errors.characterName}</p>
+                                }
                             </label>
                         </div>
                         <div className='mb-2 w-50 mx-auto'>
@@ -145,8 +165,11 @@ export const CreateCharacter = () => {
                                     name="role"
                                     value={formData.role}
                                     onChange={updateFormData}
-                                    className='form-control'
+                                    className={`form-control ${errors.role ? 'is-invalid' : ''}`}
                                 />
+                                {
+                                    errors.role && <p className='invalid-feedback'>{errors.role}</p>
+                                }
                             </label>
                         </div>
                         <div className='mb-2 w-50 mx-auto'>
@@ -157,8 +180,11 @@ export const CreateCharacter = () => {
                                     name="roleId"
                                     value={formData.roleId}
                                     onChange={updateFormData}
-                                    className='form-control'
+                                    className={`form-control ${errors.roleId ? 'is-invalid' : ''}`}
                                 />
+                                {
+                                    errors.roleId && <p className='invalid-feedback'>{errors.roleId}</p>
+                                }
                             </label>
                         </div>
                         <div className='mb-2 w-50 mx-auto'>
@@ -180,7 +206,7 @@ export const CreateCharacter = () => {
                         <button
                             className='btn btn-primary w-25 mx-auto'
                             type={"submit"}
-                            disabled={!validateFormErrors()}
+                            disabled={false}
                         >
                             Create Character
                         </button>
