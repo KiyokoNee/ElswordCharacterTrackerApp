@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {getAllCharacters} from "../services/CharacterService.ts";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 interface character {
     id: bigint,
@@ -14,6 +14,7 @@ interface character {
 export const DisplayAllCharacters = () => {
     const [characters, setCharacters] = useState<character[]>([]);
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         getAllCharacters().then(res => {
@@ -21,7 +22,7 @@ export const DisplayAllCharacters = () => {
         }).catch(err => {
             console.error();
         })
-    }, []);
+    }, [location.pathname]);
 
     const createCharacter = () => {
         navigate("/create-character")

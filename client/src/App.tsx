@@ -13,7 +13,7 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<DisplayAllCharacters />} />
-                <Route path="/add-employee" element={<CreateCharacter />} />
+                <Route path="/create-character" element={<CreateCharacter />} />
             </Routes>
             <Footer />
         </>

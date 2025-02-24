@@ -6,7 +6,7 @@ export const Header = () => {
         <div>
             <header>
                 <nav className="navbar navbar-dark bg-dark">
-                    <a className="navbar-brand" href="https://www.youtube.com">Elsword Tracker</a>
+                    <a className="navbar-brand" href="/">Elsword Tracker</a>
                 </nav>
             </header>
         </div>
