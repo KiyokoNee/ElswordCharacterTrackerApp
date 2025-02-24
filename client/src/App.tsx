@@ -4,7 +4,6 @@ import {DisplayAllCharacters} from "./components/DisplayAllCharacters.tsx";
 import {Header} from "./components/Header.tsx";
 import {Footer} from "./components/Footer.tsx";
 import {Routes, Route} from "react-router-dom";
-import {CreateCharacter} from "./components/CreateCharacter.tsx";
 import {CharacterFormView} from "./views/CharacterFormView.tsx";
 import {CharacterDetails} from "./components/CharacterDetails.tsx";
 

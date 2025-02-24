@@ -31,7 +31,7 @@ export const CharacterDetails = () => {
 
     })
 
-    const deleteCharacter = (e) => {
+    const deleteCharacter = () => {
         if(id) {
             deleteCharacterById(BigInt(id))
                 .then(res => {
@@ -41,7 +41,7 @@ export const CharacterDetails = () => {
         }
     }
 
-    const goToUpdateCharacter = (e) => {
+    const goToUpdateCharacter = () => {
         navigate(`/character/${id}/edit`)
     }
 
@@ -64,8 +64,8 @@ export const CharacterDetails = () => {
                     </div>
 
                     <div className='w-50 mx-auto d-flex justify-content-evenly'>
-                        <button className='btn btn-success' onClick={(e) => goToUpdateCharacter(e)}>Update</button>
-                        <button className='btn btn-danger' onClick={(e) => deleteCharacter(e)}>Delete</button>
+                        <button className='btn btn-success' onClick={() => goToUpdateCharacter()}>Update</button>
+                        <button className='btn btn-danger' onClick={() => deleteCharacter()}>Delete</button>
                     </div>
                 </div>
             </div>
