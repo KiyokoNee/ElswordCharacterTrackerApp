@@ -15,7 +15,7 @@ export const characterErrorCheck = (characterName: string) => {
 
     if(characterName === '') {
         errorMsg = "Character name is required!"
-    } else if(characterName.length < 6 || characterName.length > 12) {
+    } else if(characterName.length < 3 || characterName.length > 7) {
         errorMsg = "Character name must be between 3 and 7 characters long!"
     }
 

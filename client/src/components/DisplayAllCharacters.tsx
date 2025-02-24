@@ -46,7 +46,7 @@ export const DisplayAllCharacters = () => {
                     {
                         characters.map((oneCharacter, index) =>
                         <tr key={index}>
-                            <td>{oneCharacter.nickname}</td>
+                            <td><a href={`/character/${oneCharacter.id}`}>{oneCharacter.nickname}</a></td>
                             <td>{oneCharacter.characterName}</td>
                             <td>{oneCharacter.role}</td>
                             <td>{oneCharacter.roleId}</td>

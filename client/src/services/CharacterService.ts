@@ -21,7 +21,7 @@ export const getCharacterById = async (id:bigint) => {
 }
 
 export const updateCharacterById = async (id:bigint, character:object) => {
-    return await http.patch(`/${id}`, character)
+    return await http.put(`/${id}`, character)
         .then(response => response.data)
         .catch(err => {
             throw err;

@@ -2,6 +2,7 @@ package com.gearing.server.controllers;
 
 import com.gearing.server.dto.CharacterDTO;
 import com.gearing.server.services.CharacterService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class CharacterController {
     private CharacterService characterService;
 
     @PostMapping
-    public ResponseEntity<CharacterDTO> addCharacter(@RequestBody CharacterDTO characterDTO) {
+    public ResponseEntity<CharacterDTO> addCharacter(@Valid @RequestBody CharacterDTO characterDTO) {
         CharacterDTO savedCharacter = characterService.createCharacter(characterDTO);
         return new ResponseEntity<>(savedCharacter, HttpStatus.CREATED);
     }
