@@ -1,15 +1,7 @@
 import {useEffect, useState} from "react";
 import {getAllCharacters} from "../services/CharacterService.ts";
 import {useLocation, useNavigate} from "react-router-dom";
-
-interface character {
-    id: bigint,
-    nickname: String,
-    characterName: String,
-    role: String,
-    roleId: String,
-    stage: String
-}
+import {character} from "../services/interfaces.ts";
 
 export const DisplayAllCharacters = () => {
     const [characters, setCharacters] = useState<character[]>([]);

@@ -20,12 +20,8 @@ const defaultCharacterData: CharacterSlot = {
     stage: "In Progress"
 }
 
-type CharId = {
-    id?: string
-}
-
 export const CharacterFormView = () => {
-    const {id} =  useParams<CharId>()
+    const {id} =  useParams()
     const [errors, setErrors] = useState(defaultErrors)
     const currPath = useLocation().pathname
 
@@ -35,7 +31,7 @@ export const CharacterFormView = () => {
 
     useEffect(()=> {
         if(currPath === "/create-character") {
-
+            console.log(currPath)
         } else if(id){
             const idVal: bigint = BigInt(id)
             getCharacterById(BigInt(idVal))
@@ -83,7 +79,7 @@ export const CharacterFormView = () => {
             formData={formData}
             setFormData={setFormData}
             submitHandler={submitHandler}
-            buttonText={currPath=== "/create-character" ? "Create Character" : "Update Character"}
+            buttonText={currPath === "/create-character" ? "Create Character" : "Update Character"}
             errors={errors}
         />
     )

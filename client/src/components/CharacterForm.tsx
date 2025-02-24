@@ -164,7 +164,6 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
                     </form>
                 </div>
             </div>
-
         </div>
     )
 }

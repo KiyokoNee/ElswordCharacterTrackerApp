@@ -19,3 +19,12 @@ export interface ChangeTracker {
     role: boolean,
     roleId: boolean
 }
+
+export interface character {
+    id: bigint,
+    nickname: String,
+    characterName: String,
+    role: String,
+    roleId: String,
+    stage: String
+}
