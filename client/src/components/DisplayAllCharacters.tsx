@@ -20,7 +20,7 @@ export const DisplayAllCharacters = () => {
         getAllCharacters().then(res => {
             setCharacters(res);
         }).catch(err => {
-            console.error();
+            console.log(err);
         })
     }, [location.pathname]);
 

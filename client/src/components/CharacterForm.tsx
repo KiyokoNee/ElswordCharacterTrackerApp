@@ -1,9 +1,16 @@
-import {ChangeTracker, CharacterSlot} from "../services/interfaces.ts";
-import {useState} from "react";
+import {ChangeTracker, CharacterSlot, Errors} from "../services/interfaces.ts";
+import {FormEventHandler, useState} from "react";
 import {nicknameErrorCheck, roleIdErrorCheck, roleErrorCheck, characterErrorCheck} from "../services/CharacterFormErrorsService.ts";
 import * as React from "react";
 import {useLocation} from "react-router-dom";
 
+interface Props {
+    submitHandler: FormEventHandler,
+    buttonText: string,
+    formData: CharacterSlot,
+    setFormData: Function,
+    errors: Errors
+}
 const defaultChangeTracker: ChangeTracker = {
     nickname: false,
     characterName: false,
@@ -18,7 +25,7 @@ const editChangeTracker: ChangeTracker ={
     roleId: true
 }
 
-export const CharacterForm = ({formData, setFormData, submitHandler, buttonText, errors}) => {
+export const CharacterForm = ({formData, setFormData, submitHandler, buttonText, errors}: Props) => {
     const currPath:string = useLocation().pathname
     const [formErrors, setFormErrors] = useState(errors)
     const [formDataChanged, setFormDataChanged] = useState(currPath === '/create-character' ? defaultChangeTracker : editChangeTracker)
@@ -49,14 +56,14 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
     }
 
     const updateFormData = (e:React.ChangeEvent<HTMLElement>) => {
-        let name: string, value: string, type
+        let name: string, value: string
         if(e.target instanceof HTMLInputElement) {
-            ({name, value, type} = e.target)
+            ({name, value} = e.target)
         } else if (e.target instanceof HTMLSelectElement) {
-            ({name, value, type} = e.target)
+            ({name, value} = e.target)
         }
 
-        setFormData(prev => ({...prev, [name]: value}))
+        setFormData((prev: CharacterSlot) => ({...prev, [name]: value}))
         formErrorHandler(e)
         setFormDataChanged(prev => ({...prev, [name]: true}))
     }

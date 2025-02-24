@@ -56,6 +56,7 @@ export const CharacterFormView = () => {
         if(currPath === "/create-character"){
             addOneCharacter(formData)
                 .then(res => {
+                    console.log(res)
                     navigate("/")
                 })
                 .catch(err => {
@@ -66,6 +67,7 @@ export const CharacterFormView = () => {
             let idVal:bigint = BigInt(id)
             updateCharacterById(idVal, formData)
                 .then(res => {
+                    console.log(res)
                     navigate("/")
                 })
                 .catch(err => {
