@@ -2,14 +2,18 @@ import {useEffect, useState} from "react";
 import {getAllCharacters} from "../services/CharacterService.ts";
 import {useLocation, useNavigate} from "react-router-dom";
 import {character} from "../services/interfaces.ts";
+import {useHeader} from "../context/HeaderContext.tsx";
+import {Title} from "./Title.tsx";
 
 export const DisplayAllCharacters = () => {
     const [characters, setCharacters] = useState<character[]>([]);
     const navigate = useNavigate();
     const location = useLocation();
+    const {setHeaderText} = useHeader()
 
     useEffect(() => {
         getAllCharacters().then(res => {
+            setHeaderText("Current Characters")
             setCharacters(res);
         }).catch(err => {
             console.log(err);
@@ -22,7 +26,7 @@ export const DisplayAllCharacters = () => {
 
     return (
         <div className="container">
-            <h2 className="text-center">Current Characters</h2>
+            <Title />
             <button type="button" className="btn btn-primary" onClick={createCharacter}>Create Character</button>
             <table className="table table-striped">
                 <thead>

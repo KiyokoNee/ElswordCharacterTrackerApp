@@ -11,6 +11,7 @@ export interface Errors {
     characterName: string,
     role: string,
     roleId: string
+    stage?: string
 }
 
 export interface ChangeTracker {
