@@ -1,34 +1,23 @@
-import {ChangeTracker, CharacterSlot, Errors} from "../services/interfaces.ts";
+import {CharacterSlot, Errors} from "../services/interfaces.ts";
 import {FormEventHandler, useState} from "react";
 import {nicknameErrorCheck, roleIdErrorCheck, roleErrorCheck, characterErrorCheck} from "../services/CharacterFormErrorsService.ts";
 import * as React from "react";
 import {useLocation} from "react-router-dom";
 import {Title} from "./Title.tsx";
+import {defaultChangeTracker, defaultErrors, editChangeTracker} from "../services/defaultData.ts";
 
 interface Props {
     submitHandler: FormEventHandler,
     buttonText: string,
     formData: CharacterSlot,
     setFormData: Function,
-    errors: Errors
-}
-const defaultChangeTracker: ChangeTracker = {
-    nickname: false,
-    characterName: false,
-    role: false,
-    roleId: false
+    errors: Errors,
+    setErrors: Function
 }
 
-const editChangeTracker: ChangeTracker ={
-    nickname:true,
-    characterName: true,
-    role: true,
-    roleId: true
-}
-
-export const CharacterForm = ({formData, setFormData, submitHandler, buttonText, errors}: Props) => {
+export const CharacterForm = ({formData, setFormData, submitHandler, buttonText, errors, setErrors}: Props) => {
     const currPath:string = useLocation().pathname
-    const [formErrors, setFormErrors] = useState(errors)
+    const [formErrors, setFormErrors] = useState(defaultErrors)
     const [formDataChanged, setFormDataChanged] = useState(currPath === '/create-character' ? defaultChangeTracker : editChangeTracker)
 
     const formErrorHandler = (e: React.ChangeEvent<HTMLElement>) => {
@@ -64,6 +53,7 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
             ({name, value} = e.target)
         }
 
+        setErrors((prev: Errors) => ({...prev, [name]: ""}))
         setFormData((prev: CharacterSlot) => ({...prev, [name]: value}))
         formErrorHandler(e)
         setFormDataChanged(prev => ({...prev, [name]: true}))
@@ -87,10 +77,10 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
                                     name="nickname"
                                     value={formData.nickname}
                                     onChange={updateFormData}
-                                    className={`form-control ${formErrors.nickname ? 'is-invalid' : ''}`}
+                                    className={`form-control ${(formErrors.nickname|| errors.nickname) ? 'is-invalid' : ''}`}
                                 />
                                 {
-                                    formErrors.nickname && <p className='invalid-feedback'>{formErrors.nickname}</p>
+                                    (formErrors.nickname || errors.nickname) && <p className='invalid-feedback mb-0'>{formErrors.nickname || errors.nickname}</p>
                                 }
                             </label>
                         </div>
@@ -102,10 +92,10 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
                                     name="characterName"
                                     value={formData.characterName}
                                     onChange={updateFormData}
-                                    className={`form-control ${formErrors.characterName ? 'is-invalid' : ''}`}
+                                    className={`form-control ${(formErrors.characterName|| errors.characterName) ? 'is-invalid' : ''}`}
                                 />
                                 {
-                                    formErrors.characterName && <p className='invalid-feedback'>{formErrors.characterName}</p>
+                                    (formErrors.characterName || errors.characterName) && <p className='invalid-feedback mb-0'>{formErrors.characterName || errors.characterName}</p>
                                 }
                             </label>
                         </div>
@@ -117,10 +107,10 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
                                     name="role"
                                     value={formData.role}
                                     onChange={updateFormData}
-                                    className={`form-control ${formErrors.role ? 'is-invalid' : ''}`}
+                                    className={`form-control ${(formErrors.role|| errors.role) ? 'is-invalid' : ''}`}
                                 />
                                 {
-                                    formErrors.role && <p className='invalid-feedback'>{formErrors.role}</p>
+                                    (formErrors.role || errors.role) && <p className='invalid-feedback mb-0'>{formErrors.role || errors.role}</p>
                                 }
                             </label>
                         </div>
@@ -132,10 +122,10 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
                                     name="roleId"
                                     value={formData.roleId}
                                     onChange={updateFormData}
-                                    className={`form-control ${formErrors.roleId ? 'is-invalid' : ''}`}
+                                    className={`form-control ${(formErrors.roleId|| errors.roleId) ? 'is-invalid' : ''}`}
                                 />
                                 {
-                                    formErrors.roleId && <p className='invalid-feedback'>{formErrors.roleId}</p>
+                                    (formErrors.roleId || errors.roleId) && <p className='invalid-feedback mb-0'>{formErrors.roleId || errors.roleId}</p>
                                 }
                             </label>
                         </div>

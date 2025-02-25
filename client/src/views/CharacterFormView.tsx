@@ -28,6 +28,7 @@ export const CharacterFormView = () => {
                 })
                 .catch(err => {
                     console.log(err)
+                    navigate("/")
                 })
         } else {
             navigate("/")
@@ -45,7 +46,6 @@ export const CharacterFormView = () => {
                     navigate("/")
                 })
                 .catch(err => {
-                    console.log(err.response.data)
                     setErrors(err.response.data)
                 })
         }else if (id){
@@ -70,6 +70,7 @@ export const CharacterFormView = () => {
             submitHandler={submitHandler}
             buttonText={currPath === "/create-character" ? "Create Character" : "Update Character"}
             errors={errors}
+            setErrors={setErrors}
         />
     )
 }

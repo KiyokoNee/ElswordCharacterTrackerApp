@@ -1,10 +1,11 @@
-import {CharacterSlot, Errors} from "./interfaces.ts";
+import {ChangeTracker, CharacterSlot, Errors} from "./interfaces.ts";
 
 export const defaultErrors: Errors = {
     nickname: '',
     characterName: '',
     role: '',
-    roleId: ''
+    roleId: '',
+    stage: ''
 }
 
 export const defaultCharacterData: CharacterSlot = {
@@ -13,4 +14,19 @@ export const defaultCharacterData: CharacterSlot = {
     role: "",
     roleId: "",
     stage: "In Progress"
+}
+
+
+export const defaultChangeTracker: ChangeTracker = {
+    nickname: false,
+    characterName: false,
+    role: false,
+    roleId: false
+}
+
+export const editChangeTracker: ChangeTracker ={
+    nickname:true,
+    characterName: true,
+    role: true,
+    roleId: true
 }
