@@ -1,11 +1,19 @@
 package com.gearing.server.dto;
 
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+
 public class CharacterDTO {
     private Long id;
+    @Column(unique = true)
     private String nickname;
+    @NotBlank
     private String characterName;
+    @NotBlank
     private String role;
+    @NotBlank
     private String roleId;
+    @NotBlank
     private String stage;
 
     public CharacterDTO() {}
