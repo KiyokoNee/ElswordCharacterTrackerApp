@@ -1,3 +1,5 @@
+import {HeaderData} from "./types.ts";
+
 export interface CharacterSlot {
     nickname: string,
     characterName: string,
@@ -27,4 +29,10 @@ export interface character {
     role: String,
     roleId: String,
     stage: String
+}
+
+export interface HeaderContextProps {
+    readonly headerData: HeaderData | null,
+    readonly setHeaderData: (headerData: HeaderData) => void,
+    readonly loadHeaderData: () => Promise<void>
 }

@@ -1,24 +1,10 @@
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {CharacterSlot, Errors} from "../services/interfaces.ts";
 import {addOneCharacter, getCharacterById, updateCharacterById} from "../services/CharacterService.ts";
 import * as React from "react";
 import {CharacterForm} from "../components/CharacterForm.tsx";
-
-const defaultErrors: Errors = {
-    nickname: '',
-    characterName: '',
-    role: '',
-    roleId: ''
-}
-
-const defaultCharacterData: CharacterSlot = {
-    nickname: "",
-    characterName: "",
-    role: "",
-    roleId: "",
-    stage: "In Progress"
-}
+import {useHeader} from "../context/HeaderContext.tsx";
+import {defaultCharacterData, defaultErrors} from "../services/defaultData.ts";
 
 export const CharacterFormView = () => {
     const {id} =  useParams()
@@ -28,14 +14,16 @@ export const CharacterFormView = () => {
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState(defaultCharacterData)
+    const {setHeaderText} = useHeader()
 
     useEffect(()=> {
         if(currPath === "/create-character") {
-            console.log(currPath)
+            setHeaderText("Create New Character")
         } else if(id){
             const idVal: bigint = BigInt(id)
             getCharacterById(BigInt(idVal))
                 .then(res => {
+                    setHeaderText(`Update ${res.nickname}`)
                     setFormData(res)
                 })
                 .catch(err => {
@@ -44,6 +32,7 @@ export const CharacterFormView = () => {
         } else {
             navigate("/")
         }
+
     }, [])
 
     const submitHandler = (e:React.FormEvent<HTMLFormElement>)=> {
@@ -64,7 +53,7 @@ export const CharacterFormView = () => {
             updateCharacterById(idVal, formData)
                 .then(res => {
                     console.log(res)
-                    navigate("/")
+                    navigate(`/character/${id}`)
                 })
                 .catch(err => {
                     setErrors(err.response.data)

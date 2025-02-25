@@ -3,6 +3,7 @@ import {FormEventHandler, useState} from "react";
 import {nicknameErrorCheck, roleIdErrorCheck, roleErrorCheck, characterErrorCheck} from "../services/CharacterFormErrorsService.ts";
 import * as React from "react";
 import {useLocation} from "react-router-dom";
+import {Title} from "./Title.tsx";
 
 interface Props {
     submitHandler: FormEventHandler,
@@ -76,7 +77,7 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
         <div className='container '>
             <div className="row">
                 <div className='card col-md-6 offset-md-3 my-3 py-3'>
-                    <h2 className='text-center'>Create a Character</h2>
+                    <Title />
                     <form onSubmit={submitHandler} className='d-flex flex-column'>
                         <div className='mb-2 w-50 mx-auto'>
                             <label className='form-label'>
