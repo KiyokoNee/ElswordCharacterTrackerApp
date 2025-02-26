@@ -1,4 +1,5 @@
 export interface CharacterSlot {
+    id: bigint
     nickname: string,
     characterName: string,
     role: string,

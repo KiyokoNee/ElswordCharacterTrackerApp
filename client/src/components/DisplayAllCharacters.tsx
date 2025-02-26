@@ -1,16 +1,15 @@
 import {useEffect, useState} from "react";
 import {getAllCharacters} from "../services/CharacterService.ts";
 import {useLocation, useNavigate} from "react-router-dom";
-import {CharacterData} from "../data/interfaces.ts";
+import {CharacterSlot} from "../data/interfaces.ts";
 import {useHeader} from "../context/HeaderContext.tsx";
 import {Title} from "./Title.tsx";
 
 export const DisplayAllCharacters = () => {
-    const [characters, setCharacters] = useState<CharacterData[]>([]);
+    const [characters, setCharacters] = useState<CharacterSlot[]>([]);
     const navigate = useNavigate();
     const location = useLocation();
     const {setHeaderText} = useHeader()
-    const user = (sessionStorage.getItem("user") != null) ? JSON.parse(sessionStorage.getItem("user")) : null
 
     useEffect(() => {
         getAllCharacters().then(res => {

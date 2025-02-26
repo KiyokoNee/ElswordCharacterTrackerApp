@@ -19,6 +19,8 @@ export const LoginRegistrationView = () => {
     const [registerFormData, setRegisterFormData] = useState(defaultRegisterUserData)
 
     useEffect(() => {
+        if(sessionStorage.getItem("user"))
+            navigate("/")
         setHeaderText("Login or Register")
     }, [])
 
