@@ -6,7 +6,7 @@ import {defaultUserErrors, defaultLoginUserData, defaultRegisterUserData} from "
 import {useNavigate} from "react-router-dom";
 import {useHeader} from "../context/HeaderContext.tsx";
 import * as React from "react";
-import {registerUser} from "../services/UserService.ts";
+import {loginUser, registerUser} from "../services/UserService.ts";
 
 export const LoginRegistrationView = () => {
     const [loginErrors, setLoginErrors] = useState(defaultUserErrors)
@@ -25,7 +25,14 @@ export const LoginRegistrationView = () => {
     const loginSubmitHandler = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-
+        loginUser(loginFormData)
+            .then(res => {
+                sessionStorage.setItem("user", JSON.stringify(res))
+                navigate("/")
+            })
+            .catch(err => {
+                setLoginErrors(err.response.data)
+            })
 
         console.log("Login button pressed")
     }
@@ -41,8 +48,6 @@ export const LoginRegistrationView = () => {
             .catch(err => {
                 setRegisterErrors(err.response.data)
             })
-
-        console.log(registerFormData)
     }
 
     return (

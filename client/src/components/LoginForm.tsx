@@ -22,7 +22,7 @@ export const LoginForm = ({formData, setFormData, submitHandler, errors, setErro
             return
         }
 
-        setErrors((prev: UserErrors)  => ({...prev, [name]: ''}))
+        setErrors((prev: UserErrors)  => ({...prev, email: ''}))
         setFormDataChanged(prev => ({...prev, [name]: true}))
         setFormData((prev: LoginUserData) => ({...prev, [name]: value}))
     }
@@ -46,6 +46,9 @@ export const LoginForm = ({formData, setFormData, submitHandler, errors, setErro
                             onChange={updateFormData}
                             className={`form-control ${(errors.email) ? 'is-invalid' : ''} `}
                         />
+                        {
+                            (errors.email) && <p className='invalid-feedback mb-0'>{errors.email}</p>
+                        }
                     </label>
                 </div>
                 <div className="mb-2 w-50 mx-auto">
