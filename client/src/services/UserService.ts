@@ -11,3 +11,11 @@ export const registerUser = async (user: object) => {
             throw err;
         })
 }
+
+export const loginUser = async (user: object) => {
+    return await http.post('/login', user)
+        .then(res => res.data)
+        .catch(err => {
+            throw err;
+        })
+}

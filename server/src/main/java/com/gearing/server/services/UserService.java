@@ -1,5 +1,6 @@
 package com.gearing.server.services;
 
+import com.gearing.server.dto.LoginUserDTO;
 import com.gearing.server.dto.RegisterUserDTO;
 import com.gearing.server.dto.UserDTO;
 import com.gearing.server.exception.ResourceNotFoundException;
@@ -17,12 +18,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
-    public UserDTO findByEmail(String email) {
-        User user = userRepo.findByEmail(email).orElseThrow(() ->
+    public User findByEmail(String email) {
+
+        return userRepo.findByEmail(email).orElseThrow(() ->
                 new ResourceNotFoundException("User not found")
         );
-
-        return new UserDTO();
     }
 
     public User findById(Long id) {
@@ -37,5 +37,11 @@ public class UserService {
         user.setPassword(hashed);
 
         return UserMapper.userToUserDTO(userRepo.save(user));
+    }
+
+    public UserDTO loginUser(LoginUserDTO loginUserDTO) {
+        User user = findByEmail(loginUserDTO.getEmail());
+
+        return UserMapper.userToUserDTO(user);
     }
 }

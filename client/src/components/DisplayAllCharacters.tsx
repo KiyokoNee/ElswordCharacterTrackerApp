@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
 import {getAllCharacters} from "../services/CharacterService.ts";
 import {useLocation, useNavigate} from "react-router-dom";
-import {character} from "../data/interfaces.ts";
+import {CharacterData} from "../data/interfaces.ts";
 import {useHeader} from "../context/HeaderContext.tsx";
 import {Title} from "./Title.tsx";
 
 export const DisplayAllCharacters = () => {
-    const [characters, setCharacters] = useState<character[]>([]);
+    const [characters, setCharacters] = useState<CharacterData[]>([]);
     const navigate = useNavigate();
     const location = useLocation();
     const {setHeaderText} = useHeader()

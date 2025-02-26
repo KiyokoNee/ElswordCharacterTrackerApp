@@ -1,10 +1,11 @@
 import {LoginUserData, UserErrors} from "../data/interfaces.ts";
-import {useState} from "react";
+import {FormEventHandler, useState} from "react";
+import * as React from "react";
 
 interface Props {
     formData: LoginUserData,
     setFormData: Function,
-    submitHandler: Function,
+    submitHandler: FormEventHandler<HTMLFormElement>,
     errors: UserErrors,
     setErrors: Function
 }
@@ -15,9 +16,20 @@ export const LoginForm = ({formData, setFormData, submitHandler, errors, setErro
 
     const updateFormData = (e:React.ChangeEvent<HTMLElement>) => {
         let name: string, value: string
-        ({name, value} = e.target)
+        if( e.target instanceof HTMLInputElement) {
+            ({name, value} = e.target)
+        } else {
+            return
+        }
 
+        setErrors((prev: UserErrors)  => ({...prev, [name]: ''}))
+        setFormDataChanged(prev => ({...prev, [name]: true}))
         setFormData((prev: LoginUserData) => ({...prev, [name]: value}))
+    }
+
+
+    const validateFormErrors = () => {
+        return Object.values(errors).every(value => value === '') && Object.values(formDataChanged).every(value => value === true)
     }
 
     return (
@@ -51,6 +63,7 @@ export const LoginForm = ({formData, setFormData, submitHandler, errors, setErro
                 <button
                     className="btn btn-primary w-25 mx-auto"
                     type="submit"
+                    disabled={!validateFormErrors()}
                 >
                     Login
                 </button>

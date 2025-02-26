@@ -1,5 +1,5 @@
 import {Errors, UserData, UserErrors} from "../data/interfaces.ts";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, FormEventHandler, useState} from "react";
 import {defaultRegisterChangeTracker, defaultUserErrors} from "../data/defaultData.ts";
 import * as React from "react";
 import {
@@ -13,6 +13,7 @@ import {
 interface Props {
     formData: UserData,
     setFormData: Function,
+    submitHandler: FormEventHandler<HTMLFormElement>
     errors: UserErrors,
     setErrors: Function
 }
