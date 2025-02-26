@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {getAllCharacters} from "../services/CharacterService.ts";
 import {useLocation, useNavigate} from "react-router-dom";
-import {CharacterSlot} from "../data/interfaces.ts";
+import {CharacterSlot, UserData} from "../data/interfaces.ts";
 import {useHeader} from "../context/HeaderContext.tsx";
 import {Title} from "./Title.tsx";
 
@@ -10,10 +10,14 @@ export const DisplayAllCharacters = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const {setHeaderText} = useHeader()
+    const user: UserData | null = JSON.parse(sessionStorage.getItem("user"))
 
     useEffect(() => {
         getAllCharacters().then(res => {
-            setHeaderText("Current Characters")
+            if(user)
+                setHeaderText(`Welcome back, ${user.firstName} ${user.lastName}`)
+            else
+                navigate("/login")
             setCharacters(res);
         }).catch(err => {
             console.log(err);
@@ -35,7 +39,6 @@ export const DisplayAllCharacters = () => {
                         <th>Character</th>
                         <th>Class</th>
                         <th>Class Code</th>
-                        <th>Stage Completed</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +49,6 @@ export const DisplayAllCharacters = () => {
                             <td>{oneCharacter.characterName}</td>
                             <td>{oneCharacter.role}</td>
                             <td>{oneCharacter.roleId}</td>
-                            <td>{oneCharacter.stage}</td>
                         </tr>)
                     }
                 </tbody>
