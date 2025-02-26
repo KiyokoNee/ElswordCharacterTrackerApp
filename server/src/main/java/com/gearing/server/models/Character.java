@@ -25,6 +25,9 @@ public class Character {
     private String roleId;
     @NotBlank(message = "Stage is required!")
     private String stage;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
     public Character() {}
 
@@ -83,5 +86,13 @@ public class Character {
 
     public void setStage(String stage) {
         this.stage = stage;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

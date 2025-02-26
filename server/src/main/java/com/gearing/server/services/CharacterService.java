@@ -3,7 +3,9 @@ package com.gearing.server.services;
 import com.gearing.server.dto.CharacterDTO;
 import com.gearing.server.exception.ResourceNotFoundException;
 import com.gearing.server.mappers.CharacterMapper;
+import com.gearing.server.models.User;
 import com.gearing.server.repositories.CharacterRepository;
+import com.gearing.server.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +20,13 @@ import java.util.stream.Collectors;
 public class CharacterService {
     @Autowired
     private CharacterRepository characterRepo;
+    @Autowired
+    private UserRepository userRepo;
 
     public CharacterDTO createCharacter(CharacterDTO characterDTO) {
         Character character = CharacterMapper.characterDTOToCharacter(characterDTO);
+        userRepo.findById(characterDTO.getOwnerId()).ifPresent(character::setOwner);
+
         Character savedCharacter = characterRepo.save(character);
         return CharacterMapper.characterToCharacterDTO(savedCharacter);
     }

@@ -10,6 +10,7 @@ export const CharacterFormView = () => {
     const {id} =  useParams()
     const [errors, setErrors] = useState(defaultErrors)
     const currPath = useLocation().pathname
+    const user = JSON.parse(sessionStorage.getItem("user"))
 
     const navigate = useNavigate()
 
@@ -17,21 +18,24 @@ export const CharacterFormView = () => {
     const {setHeaderText} = useHeader()
 
     useEffect(()=> {
-        if(currPath === "/create-character") {
-            setHeaderText("Create New Character")
-        } else if(id){
-            const idVal: bigint = BigInt(id)
-            getCharacterById(BigInt(idVal))
-                .then(res => {
-                    setHeaderText(`Update ${res.nickname}`)
-                    setFormData(res)
-                })
-                .catch(err => {
-                    console.log(err)
-                    navigate("/")
-                })
-        } else {
-            navigate("/")
+        if(user){
+            if(currPath === "/create-character") {
+                setHeaderText("Create New Character")
+                setFormData(prevState => ({...prevState, ownerId: user.id}))
+            } else if(id){
+                const idVal: bigint = BigInt(id)
+                getCharacterById(BigInt(idVal))
+                    .then(res => {
+                        setHeaderText(`Update ${res.nickname}`)
+                        setFormData(res)
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        navigate("/")
+                    })
+            }
+        }else {
+            navigate("/login")
         }
 
     }, [])
@@ -46,6 +50,7 @@ export const CharacterFormView = () => {
                     navigate("/")
                 })
                 .catch(err => {
+                    console.log(err)
                     setErrors(err.response.data)
                 })
         }else if (id){

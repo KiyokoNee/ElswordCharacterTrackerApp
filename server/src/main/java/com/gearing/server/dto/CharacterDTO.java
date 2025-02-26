@@ -21,16 +21,18 @@ public class CharacterDTO {
     private String roleId;
     @NotBlank(message = "Stage is required!")
     private String stage;
+    private Long ownerId;
 
     public CharacterDTO() {}
 
-    public CharacterDTO(Long id, String nickname, String characterName, String role, String roleId, String stage) {
+    public CharacterDTO(Long id, String nickname, String characterName, String role, String roleId, String stage, Long ownerId) {
         this.id = id;
         this.nickname = nickname;
         this.characterName = characterName;
         this.role = role;
         this.roleId = roleId;
         this.stage = stage;
+        this.ownerId = ownerId;
     }
 
     public Long getId() {
@@ -79,5 +81,13 @@ public class CharacterDTO {
 
     public void setStage(String stage) {
         this.stage = stage;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 }
