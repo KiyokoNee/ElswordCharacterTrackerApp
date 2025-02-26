@@ -1,5 +1,5 @@
 import {createContext, useContext, useState} from "react"
-import {HeaderContextProviderType, HeaderContextType, HeaderText} from "../services/types.ts";
+import {HeaderContextProviderType, HeaderContextType, HeaderText} from "../data/types.ts";
 
 const HeaderContext = createContext({} as HeaderContextType)
 
