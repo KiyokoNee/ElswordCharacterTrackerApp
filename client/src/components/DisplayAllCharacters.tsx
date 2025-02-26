@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {getAllCharacters} from "../services/CharacterService.ts";
 import {useLocation, useNavigate} from "react-router-dom";
-import {character} from "../services/interfaces.ts";
+import {character} from "../data/interfaces.ts";
 import {useHeader} from "../context/HeaderContext.tsx";
 import {Title} from "./Title.tsx";
 
@@ -10,6 +10,7 @@ export const DisplayAllCharacters = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const {setHeaderText} = useHeader()
+    const user = (sessionStorage.getItem("user") != null) ? JSON.parse(sessionStorage.getItem("user")) : null
 
     useEffect(() => {
         getAllCharacters().then(res => {

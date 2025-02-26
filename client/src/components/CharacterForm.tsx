@@ -1,10 +1,10 @@
-import {CharacterSlot, Errors} from "../services/interfaces.ts";
+import {CharacterSlot, Errors} from "../data/interfaces.ts";
 import {FormEventHandler, useState} from "react";
 import {nicknameErrorCheck, roleIdErrorCheck, roleErrorCheck, characterErrorCheck} from "../services/CharacterFormErrorsService.ts";
 import * as React from "react";
 import {useLocation} from "react-router-dom";
 import {Title} from "./Title.tsx";
-import {defaultChangeTracker, defaultErrors, editChangeTracker} from "../services/defaultData.ts";
+import {defaultChangeTracker, defaultErrors, editChangeTracker} from "../data/defaultData.ts";
 
 interface Props {
     submitHandler: FormEventHandler,

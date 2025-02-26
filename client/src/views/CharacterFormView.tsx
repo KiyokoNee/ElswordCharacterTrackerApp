@@ -4,7 +4,7 @@ import {addOneCharacter, getCharacterById, updateCharacterById} from "../service
 import * as React from "react";
 import {CharacterForm} from "../components/CharacterForm.tsx";
 import {useHeader} from "../context/HeaderContext.tsx";
-import {defaultCharacterData, defaultErrors} from "../services/defaultData.ts";
+import {defaultCharacterData, defaultErrors} from "../data/defaultData.ts";
 
 export const CharacterFormView = () => {
     const {id} =  useParams()

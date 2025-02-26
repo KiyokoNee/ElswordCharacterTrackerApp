@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {deleteCharacterById, getCharacterById} from "../services/CharacterService.ts";
-import {defaultCharacterData} from "../services/defaultData.ts";
+import {defaultCharacterData} from "../data/defaultData.ts";
 
 export const CharacterDetails = () => {
     const navigate = useNavigate()
