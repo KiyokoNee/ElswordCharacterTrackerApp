@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.gearing.server.models.Character;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +35,7 @@ public class CharacterService {
 
     public List<CharacterDTO> getAllCharacters() {
         List<Character> characters = characterRepo.findAll();
-        // in the return convert Character objects to CharacterDTO objects using lamda expression
+        // in the return convert Character objects to CharacterDTO objects using lambda expression
         return characters.stream().map((character) -> CharacterMapper.characterToCharacterDTO(character)).collect(Collectors.toList());
     }
 
@@ -46,6 +45,7 @@ public class CharacterService {
                         () -> new ResourceNotFoundException("Character does not exist with id: " + id)
                 );
         character.setNickname(characterDTO.getNickname());
+        character.setCharacterName(characterDTO.getCharacterName());
         character.setStage(characterDTO.getStage());
         character.setRole(characterDTO.getRole());
         character.setRoleId(characterDTO.getRoleId());
