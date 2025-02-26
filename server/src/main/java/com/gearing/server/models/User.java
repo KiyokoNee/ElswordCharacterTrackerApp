@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -31,6 +33,9 @@ public class User {
                     + "one lowercase letter, one digit, <br>"
                     + "and one special character.")
     private String password;
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    private List<Character> characterList;
 
     public User() {}
 
@@ -80,5 +85,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Character> getCharacterList() {
+        return characterList;
+    }
+
+    public void setCharacterList(List<Character> characterList) {
+        this.characterList = characterList;
     }
 }

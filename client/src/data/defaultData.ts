@@ -29,7 +29,8 @@ export const defaultCharacterData: CharacterSlot = {
     characterName: "",
     role: "",
     roleId: "",
-    stage: "In Progress"
+    stage: "In Progress",
+    ownerId: 0
 }
 
 export const defaultRegisterUserData: UserData = {

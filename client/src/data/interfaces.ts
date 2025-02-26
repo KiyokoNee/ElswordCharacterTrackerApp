@@ -1,10 +1,11 @@
 export interface CharacterSlot {
-    id: bigint
+    id: number
     nickname: string,
     characterName: string,
     role: string,
     roleId: string,
     stage: "Lvl 99" | "3rd Job" | "In Progress" | "Master Class"
+    ownerId: number
 }
 
 export interface UserData {
