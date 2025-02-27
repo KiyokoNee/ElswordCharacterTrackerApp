@@ -15,18 +15,18 @@ export const CharacterFormView = () => {
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState(defaultCharacterData)
-    const {setHeaderText} = useHeader()
+    const {setTitleText} = useHeader()
 
     useEffect(()=> {
         if(user){
             if(currPath === "/create-character") {
-                setHeaderText("Create New Character")
+                setTitleText("Create New Character")
                 setFormData(prevState => ({...prevState, ownerId: user.id}))
             } else if(id){
                 const idVal: bigint = BigInt(id)
                 getCharacterById(BigInt(idVal))
                     .then(res => {
-                        setHeaderText(`Update ${res.nickname}`)
+                        setTitleText(`Update ${res.nickname}`)
                         setFormData(res)
                     })
                     .catch(err => {

@@ -6,10 +6,10 @@ const TitleContext = createContext({} as HeaderContextType)
 export const useHeader = () => useContext(TitleContext);
 
 export const HeaderProvider = ( { children }: HeaderContextProviderType ) => {
-    const [headerText, setHeaderText] = useState<HeaderText | null>(null)
+    const [titleText, setTitleText] = useState<HeaderText | null>(null)
 
     return (
-        <TitleContext.Provider value={{headerText, setHeaderText}}>
+        <TitleContext.Provider value={{titleText: titleText, setTitleText: setTitleText}}>
             { children }
         </TitleContext.Provider>
     )

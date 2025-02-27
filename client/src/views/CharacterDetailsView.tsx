@@ -13,7 +13,7 @@ export const CharacterDetailsView = () => {
     const [characterData, setCharacterData] = useState(defaultCharacterData)
     const [isOwner, setIsOwner] = useState(false)
     const user: UserData | null = JSON.parse(sessionStorage.getItem("user"))
-    const {setHeaderText} = useHeader();
+    const {setTitleText} = useHeader();
 
     useEffect(() => {
         if(user) {
@@ -24,7 +24,7 @@ export const CharacterDetailsView = () => {
                             setIsOwner(true)
                         }
                         setCharacterData(res)
-                        setHeaderText(`${res.nickname} Details`)
+                        setTitleText(`${res.nickname} Details`)
                     })
                     .catch(err => {
                         console.log(err)

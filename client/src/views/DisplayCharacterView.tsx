@@ -11,20 +11,20 @@ export const DisplayCharacterView = () => {
     const [characters, setCharacters] = useState<CharacterSlot[]>([]);
     const navigate = useNavigate();
     const location = useLocation();
-    const {setHeaderText} = useHeader()
+    const {setTitleText} = useHeader()
     const user: UserData | null = JSON.parse(sessionStorage.getItem("user"))
 
     useEffect(() => {
         if(user) {
             if(location.pathname === "/all-characters") {
-                setHeaderText("All Characters")
+                setTitleText("All Characters")
                 getAllCharacters().then(res => {
                     setCharacters(res);
                 }).catch(err => {
                     console.log(err);
                 })
             } else {
-                setHeaderText(`${user.firstName}'s Characters`)
+                setTitleText(`${user.firstName}'s Characters`)
                 getCharacterByOwnerId(BigInt(user.id))
                     .then(res => {
                         setCharacters(res)

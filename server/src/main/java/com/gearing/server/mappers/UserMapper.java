@@ -11,7 +11,8 @@ public class UserMapper {
         return new UserDTO(
                 user.getId(),
                 user.getFirstName(),
-                user.getLastName()
+                user.getLastName(),
+                (user.getMain() != null) ? user.getMain().getId() : 0
         );
     }
 

@@ -13,7 +13,7 @@ export const LoginRegistrationView = () => {
     const [registerErrors, setRegisterErrors] = useState(defaultUserErrors)
 
     const navigate = useNavigate()
-    const {setHeaderText} = useHeader()
+    const {setTitleText} = useHeader()
 
     const [loginFormData, setLoginFormData] = useState(defaultLoginUserData)
     const [registerFormData, setRegisterFormData] = useState(defaultRegisterUserData)
@@ -21,7 +21,7 @@ export const LoginRegistrationView = () => {
     useEffect(() => {
         if(sessionStorage.getItem("user"))
             navigate("/")
-        setHeaderText("Login or Register")
+        setTitleText("Login or Register")
     }, [])
 
     const loginSubmitHandler = (e:React.FormEvent<HTMLFormElement>) => {
