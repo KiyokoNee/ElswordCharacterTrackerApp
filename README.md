@@ -19,6 +19,7 @@ Before you begin, ensure you have met the following requirements:
 - Maven for project building and dependencies management
 
 ## Recommendations
+
 Although this project can be run in different IDEs, the development and testing was conducted in IntelliJ. If you run into difficulties due to using a different IDE, the development team may have a harder time assisting you.
 
 ## Usage
@@ -27,7 +28,7 @@ To run the Elsword Character Tracker:
 1) Open the project in an IDE
 2) If necessary, right click the pom.xml file to set up the backend as a Maven project
 3) Run the Application class file
-4) If Spring does not launch correctly, be sure you're pom.xml file dependencies are up to date
+4) If Spring does not launch correctly, be sure your pom.xml file dependencies are up to date
 5) Open a new terminal
 6) Move into the react folder using `cd client`
 7) If this is your first time running the project, run `npm i` to install the required packages
