@@ -43,10 +43,6 @@ export const CharacterDetailsView = () => {
         }
     }
 
-    const goToUpdateCharacter = () => {
-        navigate(`/character/${id}/edit`)
-    }
-
     const setMain = () => {
         // @ts-ignore
         setMainCharacter({userId: user.id, characterId: id})
@@ -60,7 +56,6 @@ export const CharacterDetailsView = () => {
         <CharacterDetails
             characterData={characterData}
             deleteCharacter={deleteCharacter}
-            goToUpdateCharacter={goToUpdateCharacter}
             setMain={setMain}
         />
     )

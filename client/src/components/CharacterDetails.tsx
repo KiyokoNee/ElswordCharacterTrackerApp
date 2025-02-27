@@ -1,15 +1,16 @@
-import {CharacterSlot} from "../data/interfaces.ts";
+import {CharacterData} from "../data/interfaces.ts";
 import {Title} from "./Title.tsx";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
-    characterData: CharacterSlot,
+    characterData: CharacterData,
     deleteCharacter: Function,
-    goToUpdateCharacter: Function,
     setMain: Function
 }
 
-export const CharacterDetails = ({characterData, deleteCharacter, goToUpdateCharacter, setMain}: Props) => {
+export const CharacterDetails = ({characterData, deleteCharacter, setMain}: Props) => {
     const user = JSON.parse(sessionStorage.getItem("user") as string)
+    const navigate = useNavigate()
 
     return (
         <div className='container '>
@@ -44,7 +45,7 @@ export const CharacterDetails = ({characterData, deleteCharacter, goToUpdateChar
                 {
                     (user.id === characterData.ownerId) ?
                         <div className='w-75 mx-auto d-flex justify-content-evenly'>
-                            <button className='btn btn-success' onClick={() => goToUpdateCharacter()}>Update</button>
+                            <button className='btn btn-success' onClick={() => navigate(`/character/${characterData.id}/edit`)}>Update</button>
                             <button className='btn btn-danger' onClick={() => deleteCharacter()}>Delete</button>
                         </div> : <></>
                 }

@@ -1,16 +1,17 @@
-import {CharacterSlot} from "../data/interfaces.ts";
+import {CharacterData} from "../data/interfaces.ts";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
-    characters: CharacterSlot[],
-    createCharacter: Function
+    characters: CharacterData[],
 }
 
-export const DisplayCharacters = ({characters, createCharacter}:Props) => {
+export const DisplayCharacters = ({characters}:Props) => {
     const user = JSON.parse(sessionStorage.getItem("user") as string)
+    const navigate = useNavigate();
 
     return (
         <>
-            <button type="button" className="btn btn-primary" onClick={() => createCharacter()}>Create Character</button>
+            <button type="button" className="btn btn-primary" onClick={() => navigate('/create-character')}>Create Character</button>
             <table className="table table-striped my-3">
                 <thead>
                     <tr>

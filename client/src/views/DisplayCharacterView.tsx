@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {CharacterSlot, StoredUserData} from "../data/interfaces.ts";
+import {CharacterData, StoredUserData} from "../data/interfaces.ts";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useHeader} from "../context/TitleContext.tsx";
 import {getAllCharacters, getCharacterByOwnerId} from "../services/CharacterService.ts";
@@ -8,7 +8,7 @@ import {DisplayCharacters} from "../components/DisplayCharacters.tsx";
 
 
 export const DisplayCharacterView = () => {
-    const [characters, setCharacters] = useState<CharacterSlot[]>([]);
+    const [characters, setCharacters] = useState<CharacterData[]>([]);
     const navigate = useNavigate();
     const location = useLocation();
     const {setTitleText} = useHeader()
@@ -40,16 +40,11 @@ export const DisplayCharacterView = () => {
         }
     }, [location.pathname]);
 
-    const createCharacter = () => {
-        navigate("/create-character")
-    }
-
     return (
         <div className="container">
             <Title />
             <DisplayCharacters
                 characters={characters}
-                createCharacter={createCharacter}
             />
         </div>
     )
