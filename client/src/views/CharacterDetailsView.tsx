@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {defaultCharacterData} from "../data/defaultData.ts";
-import {deleteCharacterById, getCharacterById} from "../services/CharacterService.ts";
+import {deleteCharacterById, getCharacterById, setMainCharacter} from "../services/CharacterService.ts";
 import {CharacterDetails} from "../components/CharacterDetails.tsx";
 import {UserData} from "../data/interfaces.ts";
 import {useHeader} from "../context/TitleContext.tsx";
@@ -51,12 +51,21 @@ export const CharacterDetailsView = () => {
         navigate(`/character/${id}/edit`)
     }
 
+    const setMain = () => {
+        setMainCharacter({userId: user.id, characterId: id})
+            .then(res => {
+                sessionStorage.setItem("user", JSON.stringify(res))
+                navigate(`/character/${id}`)
+            })
+    }
+
     return (
         <CharacterDetails
             characterData={characterData}
             isOwner={isOwner}
             deleteCharacter={deleteCharacter}
             goToUpdateCharacter={goToUpdateCharacter}
+            setMain={setMain}
         />
     )
 }

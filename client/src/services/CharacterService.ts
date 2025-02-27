@@ -36,6 +36,14 @@ export const updateCharacterById = async (id:bigint, character:object) => {
         });
 }
 
+export const setMainCharacter = async (data:object) => {
+    return await http.put("/main", data)
+        .then(res => res.data)
+        .catch(err => {
+            throw err;
+        })
+}
+
 export const addOneCharacter = async (character:object) => {
     return await http.post('', character)
         .then(res => res.data)
