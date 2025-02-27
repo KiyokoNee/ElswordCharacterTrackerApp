@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@Valid @RequestBody LoginUserDTO loginUserDTO, BindingResult result) {
+    public ResponseEntity<?> loginUser(@Valid @RequestBody LoginUserDTO loginUserDTO) {
         Map<String, String> errors = new HashMap<>();
         try{
             User loginUser = userService.findByEmail(loginUserDTO.getEmail());

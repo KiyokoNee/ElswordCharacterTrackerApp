@@ -1,11 +1,14 @@
 package com.gearing.server.services;
 
 import com.gearing.server.dto.LoginUserDTO;
+import com.gearing.server.dto.MainChangeDTO;
 import com.gearing.server.dto.RegisterUserDTO;
 import com.gearing.server.dto.UserDTO;
 import com.gearing.server.exception.ResourceNotFoundException;
 import com.gearing.server.mappers.UserMapper;
+import com.gearing.server.models.Character;
 import com.gearing.server.models.User;
+import com.gearing.server.repositories.CharacterRepository;
 import com.gearing.server.repositories.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,10 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private CharacterService characterService;
+    @Autowired
+    private CharacterRepository characterRepository;
 
     public User findByEmail(String email) {
 
@@ -43,5 +50,19 @@ public class UserService {
         User user = findByEmail(loginUserDTO.getEmail());
 
         return UserMapper.userToUserDTO(user);
+    }
+
+    public UserDTO changeMain(MainChangeDTO mainChangeDTO) {
+        Optional<User> optionalUser = userRepo.findById(mainChangeDTO.getUserId());
+        Optional<Character> optionalCharacter = characterRepository.findById(mainChangeDTO.getCharacterId());
+        if(optionalUser.isEmpty() || optionalCharacter.isEmpty()) {
+            return null;
+        }
+        User user = optionalUser.get();
+        Character character = optionalCharacter.get();
+
+        user.setMain(character);
+        return UserMapper.userToUserDTO(userRepo.save(user));
+
     }
 }

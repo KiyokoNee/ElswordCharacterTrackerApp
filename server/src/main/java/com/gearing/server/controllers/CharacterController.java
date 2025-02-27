@@ -1,7 +1,14 @@
 package com.gearing.server.controllers;
 
 import com.gearing.server.dto.CharacterDTO;
+import com.gearing.server.dto.MainChangeDTO;
+import com.gearing.server.dto.UserDTO;
+import com.gearing.server.mappers.CharacterMapper;
+import com.gearing.server.mappers.UserMapper;
+import com.gearing.server.models.Character;
+import com.gearing.server.models.User;
 import com.gearing.server.services.CharacterService;
+import com.gearing.server.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +23,8 @@ import java.util.List;
 public class CharacterController {
     @Autowired
     private CharacterService characterService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping
     public ResponseEntity<CharacterDTO> addCharacter(@Valid @RequestBody CharacterDTO characterDTO) {
@@ -45,6 +54,11 @@ public class CharacterController {
     public ResponseEntity<CharacterDTO> updateCharacter(@PathVariable("id") Long characterId, @Valid @RequestBody CharacterDTO characterDTO) {
         CharacterDTO updatedCharacter = characterService.updateCharacter(characterId, characterDTO);
         return ResponseEntity.ok(updatedCharacter);
+    }
+
+    @PutMapping("/main")
+    public ResponseEntity<UserDTO> setMainCharacter(@Valid @RequestBody MainChangeDTO mainChangeDTO) {
+        return ResponseEntity.ok(userService.changeMain(mainChangeDTO));
     }
 
     @DeleteMapping("/{id}")
