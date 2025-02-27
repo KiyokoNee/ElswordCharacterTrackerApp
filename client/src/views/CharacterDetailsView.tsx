@@ -35,7 +35,6 @@ export const CharacterDetailsView = () => {
         } else {
             navigate("/login")
         }
-
     }, [])
 
     const deleteCharacter = () => {
