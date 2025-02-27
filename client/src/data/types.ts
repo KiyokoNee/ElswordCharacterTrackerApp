@@ -1,8 +1,8 @@
 import * as React from "react";
 
 export type HeaderContextType = {
-    headerText: any,
-    setHeaderText: any
+    titleText: any,
+    setTitleText: any
 }
 
 export type HeaderContextProviderType = {

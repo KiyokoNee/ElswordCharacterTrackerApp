@@ -3,30 +3,30 @@ import {useEffect, useState} from "react";
 import {addOneCharacter, getCharacterById, updateCharacterById} from "../services/CharacterService.ts";
 import * as React from "react";
 import {CharacterForm} from "../components/CharacterForm.tsx";
-import {useHeader} from "../context/HeaderContext.tsx";
+import {useHeader} from "../context/TitleContext.tsx";
 import {defaultCharacterData, defaultErrors} from "../data/defaultData.ts";
 
 export const CharacterFormView = () => {
     const {id} =  useParams()
     const [errors, setErrors] = useState(defaultErrors)
     const currPath = useLocation().pathname
-    const user = JSON.parse(sessionStorage.getItem("user"))
+    const user = JSON.parse(sessionStorage.getItem("user") as string)
 
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState(defaultCharacterData)
-    const {setHeaderText} = useHeader()
+    const {setTitleText} = useHeader()
 
     useEffect(()=> {
         if(user){
             if(currPath === "/create-character") {
-                setHeaderText("Create New Character")
+                setTitleText("Create New Character")
                 setFormData(prevState => ({...prevState, ownerId: user.id}))
             } else if(id){
                 const idVal: bigint = BigInt(id)
                 getCharacterById(BigInt(idVal))
                     .then(res => {
-                        setHeaderText(`Update ${res.nickname}`)
+                        setTitleText(`Update ${res.nickname}`)
                         setFormData(res)
                     })
                     .catch(err => {
@@ -45,19 +45,16 @@ export const CharacterFormView = () => {
 
         if(currPath === "/create-character"){
             addOneCharacter(formData)
-                .then(res => {
-                    console.log(res)
+                .then(() => {
                     navigate("/")
                 })
                 .catch(err => {
-                    console.log(err)
                     setErrors(err.response.data)
                 })
         }else if (id){
             let idVal:bigint = BigInt(id)
             updateCharacterById(idVal, formData)
-                .then(res => {
-                    console.log(res)
+                .then(() => {
                     navigate(`/character/${id}`)
                 })
                 .catch(err => {

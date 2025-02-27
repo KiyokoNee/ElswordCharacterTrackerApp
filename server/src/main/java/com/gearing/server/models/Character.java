@@ -25,9 +25,12 @@ public class Character {
     private String roleId;
     @NotBlank(message = "Stage is required!")
     private String stage;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private User owner;
+    @OneToOne(mappedBy="main", fetch = FetchType.LAZY)
+    private User mainUser;
 
     public Character() {}
 
@@ -94,5 +97,13 @@ public class Character {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public User getMainUser() {
+        return mainUser;
+    }
+
+    public void setMainUser(User mainUser) {
+        this.mainUser = mainUser;
     }
 }

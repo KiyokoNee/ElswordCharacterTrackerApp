@@ -4,7 +4,7 @@ import {Title} from "../components/Title.tsx";
 import {useEffect, useState} from "react";
 import {defaultUserErrors, defaultLoginUserData, defaultRegisterUserData} from "../data/defaultData.ts";
 import {useNavigate} from "react-router-dom";
-import {useHeader} from "../context/HeaderContext.tsx";
+import {useHeader} from "../context/TitleContext.tsx";
 import * as React from "react";
 import {loginUser, registerUser} from "../services/UserService.ts";
 
@@ -13,7 +13,7 @@ export const LoginRegistrationView = () => {
     const [registerErrors, setRegisterErrors] = useState(defaultUserErrors)
 
     const navigate = useNavigate()
-    const {setHeaderText} = useHeader()
+    const {setTitleText} = useHeader()
 
     const [loginFormData, setLoginFormData] = useState(defaultLoginUserData)
     const [registerFormData, setRegisterFormData] = useState(defaultRegisterUserData)
@@ -21,7 +21,7 @@ export const LoginRegistrationView = () => {
     useEffect(() => {
         if(sessionStorage.getItem("user"))
             navigate("/")
-        setHeaderText("Login or Register")
+        setTitleText("Login or Register")
     }, [])
 
     const loginSubmitHandler = (e:React.FormEvent<HTMLFormElement>) => {
@@ -35,8 +35,6 @@ export const LoginRegistrationView = () => {
             .catch(err => {
                 setLoginErrors(err.response.data)
             })
-
-        console.log("Login button pressed")
     }
 
     const registerSubmitHandler = (e:React.FormEvent<HTMLFormElement>) => {

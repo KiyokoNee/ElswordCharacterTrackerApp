@@ -8,6 +8,7 @@ export const DropDownNav = () => {
         sessionStorage.removeItem("user")
         navigate("/login")
     }
+
     return (
         <Dropdown>
             <Dropdown.Toggle variant="dark" id="main-dropdown">
@@ -15,7 +16,8 @@ export const DropDownNav = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-                <Dropdown.Item href="/">All Characters</Dropdown.Item>
+                <Dropdown.Item href="/">My Characters</Dropdown.Item>
+                <Dropdown.Item href="/all-characters">All Characters</Dropdown.Item>
                 <Dropdown.Item href="/create-character">Create Character</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={() => logoutUser()}>Logout</Dropdown.Item>

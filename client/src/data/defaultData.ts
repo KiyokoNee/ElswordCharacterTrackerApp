@@ -1,11 +1,10 @@
 import {
     ChangeTracker,
-    CharacterSlot,
     Errors,
     UserData,
     UserErrors,
     LoginUserData,
-    UserChangeTracker
+    UserChangeTracker, CharacterData
 } from "./interfaces.ts";
 
 export const defaultErrors: Errors = {
@@ -24,7 +23,8 @@ export const defaultUserErrors: UserErrors = {
     confirmPassword: ''
 }
 
-export const defaultCharacterData: CharacterSlot = {
+export const defaultCharacterData: CharacterData = {
+    id: 0,
     nickname: "",
     characterName: "",
     role: "",

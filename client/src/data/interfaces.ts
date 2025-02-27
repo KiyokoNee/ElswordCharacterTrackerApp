@@ -1,4 +1,13 @@
 export interface CharacterSlot {
+    nickname: string,
+    characterName: string,
+    role: string,
+    roleId: string,
+    stage: "Lvl 99" | "3rd Job" | "In Progress" | "Master Class"
+    ownerId: number
+}
+
+export interface CharacterData {
     id: number
     nickname: string,
     characterName: string,
@@ -14,6 +23,12 @@ export interface UserData {
     email: string,
     password: string,
     confirmPassword: string
+}
+
+export interface StoredUserData {
+    id: bigint,
+    firstName: string,
+    lastName: string
 }
 
 export interface LoginUserData {

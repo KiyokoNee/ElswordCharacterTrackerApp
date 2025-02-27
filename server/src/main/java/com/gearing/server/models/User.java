@@ -36,6 +36,9 @@ public class User {
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Character> characterList;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "main_id")
+    private Character main;
 
     public User() {}
 
@@ -93,5 +96,13 @@ public class User {
 
     public void setCharacterList(List<Character> characterList) {
         this.characterList = characterList;
+    }
+
+    public Character getMain() {
+        return main;
+    }
+
+    public void setMain(Character main) {
+        this.main = main;
     }
 }
