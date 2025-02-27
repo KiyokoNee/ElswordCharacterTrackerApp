@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.gearing.server.models.Character;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,7 +44,17 @@ public class CharacterService {
     public List<CharacterDTO> getAllCharacters() {
         List<Character> characters = characterRepo.findAll();
         // in the return convert Character objects to CharacterDTO objects using lambda expression
-        return characters.stream().map((character) -> CharacterMapper.characterToCharacterDTO(character)).collect(Collectors.toList());
+        return characters.stream().map(CharacterMapper::characterToCharacterDTO).collect(Collectors.toList());
+    }
+
+    public List<CharacterDTO> getCharactersByOwnerId(Long ownerId) {
+        Optional<User> owner = userRepo.findById(ownerId);
+
+        if(owner.isEmpty())
+            return new ArrayList<>();
+
+        List<Character> characters = characterRepo.findCharactersByOwner(owner.get());
+        return characters.stream().map(CharacterMapper::characterToCharacterDTO).collect(Collectors.toList());
     }
 
     public CharacterDTO updateCharacter(Long id, CharacterDTO characterDTO) {

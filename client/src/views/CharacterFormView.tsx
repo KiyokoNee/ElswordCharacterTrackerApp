@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {addOneCharacter, getCharacterById, updateCharacterById} from "../services/CharacterService.ts";
 import * as React from "react";
 import {CharacterForm} from "../components/CharacterForm.tsx";
-import {useHeader} from "../context/HeaderContext.tsx";
+import {useHeader} from "../context/TitleContext.tsx";
 import {defaultCharacterData, defaultErrors} from "../data/defaultData.ts";
 
 export const CharacterFormView = () => {
@@ -46,18 +46,15 @@ export const CharacterFormView = () => {
         if(currPath === "/create-character"){
             addOneCharacter(formData)
                 .then(res => {
-                    console.log(res)
                     navigate("/")
                 })
                 .catch(err => {
-                    console.log(err)
                     setErrors(err.response.data)
                 })
         }else if (id){
             let idVal:bigint = BigInt(id)
             updateCharacterById(idVal, formData)
                 .then(res => {
-                    console.log(res)
                     navigate(`/character/${id}`)
                 })
                 .catch(err => {

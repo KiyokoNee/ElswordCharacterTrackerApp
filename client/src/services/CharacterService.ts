@@ -12,6 +12,14 @@ export const getAllCharacters = async () => {
         });
 }
 
+export const getCharacterByOwnerId = async (id:bigint) => {
+    return await http.get(`/owner/${id}`)
+        .then(res => res.data)
+        .catch(err => {
+            throw err;
+        })
+}
+
 export const getCharacterById = async (id:bigint) => {
     return await http.get(`/${id}`)
         .then(response => response.data)

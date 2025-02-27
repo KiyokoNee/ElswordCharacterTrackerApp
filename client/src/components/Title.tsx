@@ -1,4 +1,4 @@
-import {useHeader} from "../context/HeaderContext.tsx";
+import {useHeader} from "../context/TitleContext.tsx";
 
 
 export const Title = () => {

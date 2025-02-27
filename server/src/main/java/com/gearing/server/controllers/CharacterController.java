@@ -35,6 +35,12 @@ public class CharacterController {
         return ResponseEntity.ok(characters);
     }
 
+    @GetMapping("/owner/{id}")
+    public ResponseEntity<List<CharacterDTO>> getCharacterByOwner(@PathVariable("id") Long ownerId) {
+        List<CharacterDTO> characters = characterService.getCharactersByOwnerId(ownerId);
+        return ResponseEntity.ok(characters);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<CharacterDTO> updateCharacter(@PathVariable("id") Long characterId, @Valid @RequestBody CharacterDTO characterDTO) {
         CharacterDTO updatedCharacter = characterService.updateCharacter(characterId, characterDTO);
