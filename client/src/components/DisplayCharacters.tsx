@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const DisplayCharacters = ({characters, createCharacter}:Props) => {
-    const user = JSON.parse(sessionStorage.getItem("user"))
+    const user = JSON.parse(sessionStorage.getItem("user") as string)
 
     return (
         <>

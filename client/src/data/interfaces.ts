@@ -1,5 +1,4 @@
 export interface CharacterSlot {
-    id: number
     nickname: string,
     characterName: string,
     role: string,
@@ -14,6 +13,12 @@ export interface UserData {
     email: string,
     password: string,
     confirmPassword: string
+}
+
+export interface StoredUserData {
+    id: bigint,
+    firstName: string,
+    lastName: string
 }
 
 export interface LoginUserData {

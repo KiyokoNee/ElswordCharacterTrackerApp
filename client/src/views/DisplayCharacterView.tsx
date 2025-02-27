@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {CharacterSlot, UserData} from "../data/interfaces.ts";
+import {CharacterSlot, StoredUserData} from "../data/interfaces.ts";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useHeader} from "../context/TitleContext.tsx";
 import {getAllCharacters, getCharacterByOwnerId} from "../services/CharacterService.ts";
@@ -12,7 +12,7 @@ export const DisplayCharacterView = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const {setTitleText} = useHeader()
-    const user: UserData | null = JSON.parse(sessionStorage.getItem("user"))
+    const user: StoredUserData | null = JSON.parse(sessionStorage.getItem("user") as string)
 
     useEffect(() => {
         if(user) {

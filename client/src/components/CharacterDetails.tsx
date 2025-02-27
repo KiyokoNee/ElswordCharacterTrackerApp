@@ -3,14 +3,13 @@ import {Title} from "./Title.tsx";
 
 interface Props {
     characterData: CharacterSlot,
-    isOwner: boolean,
     deleteCharacter: Function,
     goToUpdateCharacter: Function,
     setMain: Function
 }
 
-export const CharacterDetails = ({characterData, isOwner, deleteCharacter, goToUpdateCharacter, setMain}: Props) => {
-    const user = JSON.parse(sessionStorage.getItem("user"))
+export const CharacterDetails = ({characterData, deleteCharacter, goToUpdateCharacter, setMain}: Props) => {
+    const user = JSON.parse(sessionStorage.getItem("user") as string)
 
     return (
         <div className='container '>
@@ -30,7 +29,7 @@ export const CharacterDetails = ({characterData, isOwner, deleteCharacter, goToU
                         <p>{characterData.roleId}</p>
                     </div>
                     {
-                        isOwner ?
+                        (user.id === characterData.ownerId) ?
                             <div className='w-50 mx-auto d-flex justify-content-between align-items-center'>
                                 <p className='fw-bold py-0'>Main Status: </p>
                                 <p>
@@ -43,7 +42,7 @@ export const CharacterDetails = ({characterData, isOwner, deleteCharacter, goToU
                     }
                 </div>
                 {
-                    isOwner ?
+                    (user.id === characterData.ownerId) ?
                         <div className='w-75 mx-auto d-flex justify-content-evenly'>
                             <button className='btn btn-success' onClick={() => goToUpdateCharacter()}>Update</button>
                             <button className='btn btn-danger' onClick={() => deleteCharacter()}>Delete</button>

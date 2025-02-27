@@ -10,7 +10,7 @@ export const CharacterFormView = () => {
     const {id} =  useParams()
     const [errors, setErrors] = useState(defaultErrors)
     const currPath = useLocation().pathname
-    const user = JSON.parse(sessionStorage.getItem("user"))
+    const user = JSON.parse(sessionStorage.getItem("user") as string)
 
     const navigate = useNavigate()
 
@@ -45,7 +45,7 @@ export const CharacterFormView = () => {
 
         if(currPath === "/create-character"){
             addOneCharacter(formData)
-                .then(res => {
+                .then(() => {
                     navigate("/")
                 })
                 .catch(err => {
@@ -54,7 +54,7 @@ export const CharacterFormView = () => {
         }else if (id){
             let idVal:bigint = BigInt(id)
             updateCharacterById(idVal, formData)
-                .then(res => {
+                .then(() => {
                     navigate(`/character/${id}`)
                 })
                 .catch(err => {
