@@ -1,6 +1,4 @@
 package com.gearing.server.mappers;
-
-import com.gearing.server.dto.LoginUserDTO;
 import com.gearing.server.dto.RegisterUserDTO;
 import com.gearing.server.dto.UserDTO;
 import com.gearing.server.models.User;
