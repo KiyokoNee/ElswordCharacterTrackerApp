@@ -2,7 +2,6 @@ package com.gearing.server.mappers;
 
 import com.gearing.server.dto.CharacterDTO;
 import com.gearing.server.models.Character;
-import com.gearing.server.models.User;
 import com.gearing.server.services.UserService;
 
 public class CharacterMapper {

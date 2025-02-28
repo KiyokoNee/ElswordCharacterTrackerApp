@@ -29,7 +29,7 @@ public class Character {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private User owner;
-    @OneToOne(mappedBy="main", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy="main")
     private User mainUser;
 
     public Character() {}
