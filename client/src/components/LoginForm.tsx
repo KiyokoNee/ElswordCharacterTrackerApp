@@ -33,8 +33,8 @@ export const LoginForm = ({formData, setFormData, submitHandler, errors, setErro
     }
 
     return (
-        <div className="card col-md-5 my-3 py-3">
-            <h3 className="text-center py-3">Login</h3>
+        <div className="card card-bg col-md-5 my-3 py-3">
+            <h3 className="text-center py-3 text-light">Login</h3>
             <form className="d-flex flex-column" onSubmit={submitHandler}>
                 <div className="mb-2 w-50 mx-auto">
                     <label className='form-label'>
@@ -64,7 +64,7 @@ export const LoginForm = ({formData, setFormData, submitHandler, errors, setErro
                     </label>
                 </div>
                 <button
-                    className="btn btn-primary w-25 mx-auto"
+                    className="btn btn-dark w-25 mx-auto"
                     type="submit"
                     disabled={!validateFormErrors()}
                 >

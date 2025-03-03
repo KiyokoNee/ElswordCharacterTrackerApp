@@ -15,7 +15,7 @@ export const CharacterDetails = ({characterData, deleteCharacter, setMain}: Prop
     return (
         <div className='container '>
             <div className="row">
-                <div className='card col-md-6 offset-md-3 my-3 py-3'>
+                <div className='card col-md-6 offset-md-3 my-3 py-3 card-bg'>
                     <Title />
                     <div className='w-50 mx-auto d-flex justify-content-between align-items-center'>
                         <p className='fw-bold'>Character: </p>

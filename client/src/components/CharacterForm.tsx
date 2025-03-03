@@ -66,7 +66,7 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
     return (
         <div className='container '>
             <div className="row">
-                <div className='card col-md-6 offset-md-3 my-3 py-3'>
+                <div className='card col-md-6 offset-md-3 my-3 py-3 card-bg'>
                     <Title />
                     <form onSubmit={submitHandler} className='d-flex flex-column'>
                         <div className='mb-2 w-50 mx-auto'>
@@ -146,7 +146,7 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
                             </label>
                         </div>
                         <button
-                            className='btn btn-primary w-25 mx-auto'
+                            className='btn btn-dark w-25 mx-auto'
                             type={"submit"}
                             disabled={!validateFormErrors()}
                         >

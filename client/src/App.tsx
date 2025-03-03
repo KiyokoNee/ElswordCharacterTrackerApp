@@ -12,7 +12,7 @@ import {DisplayCharacterView} from "./views/DisplayCharacterView.tsx";
 function App() {
     // Only for the routes and potential context data. NOTHING ELSE
     return (
-        <div className='d-flex flex-column min-vh-100'>
+        <div className='d-flex flex-column min-vh-100 body-bg bg-dark'>
             <Header />
             <Routes>
                 <Route path="/login" element={<LoginRegistrationView />} />

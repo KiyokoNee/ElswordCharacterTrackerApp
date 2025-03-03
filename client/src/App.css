@@ -1,8 +1,16 @@
+* {
+    color: white;
+}
+
 .table {
-    --bs-table-striped-bg: aliceblue;
-    --bs-table-bg: honeydew;
+    --bs-table-striped-bg: #3f3f3f;
+    --bs-table-bg: #45414e;
+}
+
+.card-bg {
+    background-color: #45414e;
 }
 
 a {
-    color: midnightblue;
+    color: gold;
 }

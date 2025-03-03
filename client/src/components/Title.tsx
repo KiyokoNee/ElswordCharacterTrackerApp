@@ -5,6 +5,6 @@ export const Title = () => {
     const {titleText} = useHeader()
 
     return (
-        <h2 className="text-center py-3">{titleText}</h2>
+        <h2 className="text-center py-3 text-light">{titleText}</h2>
     )
 }
