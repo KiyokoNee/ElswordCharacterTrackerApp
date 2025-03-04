@@ -29,6 +29,10 @@ export const CharacterDetails = ({characterData, deleteCharacter, setMain}: Prop
                         <p className='fw-bold'>Class Code: </p>
                         <p>{characterData.roleId}</p>
                     </div>
+                    <div className='w-50 mx-auto d-flex justify-content-between align-items-center'>
+                        <p className='fw-bold'>Stage Progress: </p>
+                        <p>{characterData.stage}</p>
+                    </div>
                     {
                         (user.id === characterData.ownerId) ?
                             <div className='w-50 mx-auto d-flex justify-content-between align-items-center'>

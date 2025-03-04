@@ -138,10 +138,10 @@ export const CharacterForm = ({formData, setFormData, submitHandler, buttonText,
                                     onChange={updateFormData}
                                     className='form-select'
                                 >
-                                    <option value="In Progress">In Progress</option>
-                                    <option value="Lvl 99">Lvl 99</option>
-                                    <option value="3rd Job">3rd Job</option>
-                                    <option value="Master Class">Master Class</option>
+                                    <option className="text-dark" value="In Progress">In Progress</option>
+                                    <option className="text-dark" value="Lvl 99">Lvl 99</option>
+                                    <option className="text-dark" value="3rd Job">3rd Job</option>
+                                    <option className="text-dark" value="Master Class">Master Class</option>
                                 </select>
                             </label>
                         </div>
