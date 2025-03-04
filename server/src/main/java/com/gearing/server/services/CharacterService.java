@@ -14,6 +14,7 @@ import com.gearing.server.models.Character;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -75,11 +76,15 @@ public class CharacterService {
 
     public void deleteCharacter(Long id) {
         // check that character exists
-        characterRepo.findById(id)
+        Character character = characterRepo.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Character does not exist with id: " + id)
                 );
-
+        if(Objects.equals(character.getOwner().getMain().getId(), id)) {
+            User user = character.getOwner();
+            user.setMain(null);
+            userRepo.save(user);
+        }
         characterRepo.deleteById(id);
     }
 }

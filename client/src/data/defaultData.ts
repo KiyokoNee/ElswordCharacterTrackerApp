@@ -24,7 +24,6 @@ export const defaultUserErrors: UserErrors = {
 }
 
 export const defaultCharacterData: CharacterData = {
-    id: 0,
     nickname: "",
     characterName: "",
     role: "",
